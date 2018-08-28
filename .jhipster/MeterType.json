@@ -1,0 +1,24 @@
+{
+    "name": "MeterType",
+    "fields": [
+        {
+            "fieldName": "meterType",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 30
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180828125402",
+    "entityTableName": "meter_type",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

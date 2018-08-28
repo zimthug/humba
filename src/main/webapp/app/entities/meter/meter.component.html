@@ -1,0 +1,92 @@
+<div>
+    <h2 id="page-heading">
+        <span>Meters</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-meter" [routerLink]="['/meter/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Meter
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="meters">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="meter"><span>Meter</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dateManufactured"><span>Date Manufactured</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="statusDate"><span>Status Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="owner"><span>Owner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="meterType.id"><span>Meter Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="meterModel.id"><span>Meter Model</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="warehouse.id"><span>Warehouse</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="meterStatus.id"><span>Meter Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let meter of meters ;trackBy: trackId">
+                <td><a [routerLink]="['/meter', meter.id, 'view' ]">{{meter.id}}</a></td>
+                <td>{{meter.meter}}</td>
+                <td>{{meter.dateManufactured | date:'mediumDate'}}</td>
+                <td>{{meter.statusDate | date:'mediumDate'}}</td>
+                <td>{{meter.owner}}</td>
+                <td>
+                    <div *ngIf="meter.meterType">
+                        <a [routerLink]="['../meter-type', meter.meterType?.id, 'view' ]" >{{meter.meterType?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="meter.meterModel">
+                        <a [routerLink]="['../meter-model', meter.meterModel?.id, 'view' ]" >{{meter.meterModel?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="meter.warehouse">
+                        <a [routerLink]="['../warehouse', meter.warehouse?.id, 'view' ]" >{{meter.warehouse?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="meter.meterStatus">
+                        <a [routerLink]="['../meter-status', meter.meterStatus?.id, 'view' ]" >{{meter.meterStatus?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/meter', meter.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/meter', meter.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'meter/'+ meter.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="meters && meters.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

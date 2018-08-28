@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="meter">
+            <h2><span>Meter</span> {{meter.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Meter</span></dt>
+                <dd>
+                    <span>{{meter.meter}}</span>
+                </dd>
+                <dt><span>Date Manufactured</span></dt>
+                <dd>
+                    <span>{{meter.dateManufactured}}</span>
+                </dd>
+                <dt><span>Status Date</span></dt>
+                <dd>
+                    <span>{{meter.statusDate}}</span>
+                </dd>
+                <dt><span>Owner</span></dt>
+                <dd>
+                    <span>{{meter.owner}}</span>
+                </dd>
+                <dt><span>Meter Type</span></dt>
+                <dd>
+                    <div *ngIf="meter.meterType">
+                        <a [routerLink]="['/meter-type', meter.meterType?.id, 'view']">{{meter.meterType?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Meter Model</span></dt>
+                <dd>
+                    <div *ngIf="meter.meterModel">
+                        <a [routerLink]="['/meter-model', meter.meterModel?.id, 'view']">{{meter.meterModel?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Warehouse</span></dt>
+                <dd>
+                    <div *ngIf="meter.warehouse">
+                        <a [routerLink]="['/warehouse', meter.warehouse?.id, 'view']">{{meter.warehouse?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Meter Status</span></dt>
+                <dd>
+                    <div *ngIf="meter.meterStatus">
+                        <a [routerLink]="['/meter-status', meter.meterStatus?.id, 'view']">{{meter.meterStatus?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/meter', meter.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

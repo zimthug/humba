@@ -1,0 +1,85 @@
+entity City {
+	cityName String
+}
+
+entity Station {
+    stationCode String,
+	stationName String
+}
+
+relationship OneToOne {
+	City{station} to Station
+}
+
+entity Train {
+	trainCode String,
+	numberOfSeats Integer
+}
+
+entity Customer {
+	firstName String,
+	surname String,
+	address String,
+    username String
+}
+
+entity FavouriteJourneys {
+	originStation Long,
+    destinationStation Long,
+    dateTravelled Instant
+}
+
+relationship OneToMany {
+	Customer{favouriteJourneys} to FavouriteJourneys{customer}
+}
+
+relationship OneToOne {
+	Customer{ticket} to Ticket{customer}
+}
+
+relationship OneToMany {
+	Station{ticket} to Ticket{station}
+}
+
+entity TimeTable {
+    startTime Integer,
+	endTime Integer,
+    originStation Long,
+    destinationStation Long,
+	price Float
+}
+
+relationship OneToMany {
+	Train{timeTable} to TimeTable{customer}    
+}
+
+entity Ticket {
+	purchaseDate Instant,
+	travelDate  ZonedDateTime,
+	numberOfTravellers Integer,
+	pricePaid Float,
+	cardIssuer CardIssuer,
+	deliveryMode DeliveryMode,
+    ticketStatus TicketStatus
+}
+
+enum DeliveryMode {
+    STATION, POSTAL
+}
+
+enum CardIssuer {
+    VISA, MASTERCARD
+}
+
+enum TicketStatus {
+    PAID, DELIVERED, TRAVELLED, CANCELLED
+}
+
+
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Employee, Job
+// Set an angular suffix
+angularSuffix * with mySuffix

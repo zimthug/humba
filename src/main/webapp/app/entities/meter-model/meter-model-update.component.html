@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-meter-model-heading">Create or edit a Meter Model</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!meterModel.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="meterModel.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_meterModel">Meter Model</label>
+                    <input type="text" class="form-control" name="meterModel" id="field_meterModel"
+                        [(ngModel)]="meterModel.meterModel" required maxlength="30"/>
+                    <div [hidden]="!(editForm.controls.meterModel?.dirty && editForm.controls.meterModel?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.meterModel?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.meterModel?.errors?.maxlength">
+                        This field cannot be longer than 30 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_meterMake">Meter Make</label>
+                    <select class="form-control" id="field_meterMake" name="meterMake" [(ngModel)]="meterModel.meterMake" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="meterMakeOption.id === meterModel.meterMake?.id ? meterModel.meterMake : meterMakeOption" *ngFor="let meterMakeOption of metermakes; trackBy: trackMeterMakeById">{{meterMakeOption.meterMake}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_meterType">Meter Type</label>
+                    <select class="form-control" id="field_meterType" name="meterType" [(ngModel)]="meterModel.meterType" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="meterTypeOption.id === meterModel.meterType?.id ? meterModel.meterType : meterTypeOption" *ngFor="let meterTypeOption of metertypes; trackBy: trackMeterTypeById">{{meterTypeOption.meterType}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+{
+    "name": "MeterMake",
+    "fields": [
+        {
+            "fieldName": "meterMake",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 30
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180828125400",
+    "entityTableName": "meter_make",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

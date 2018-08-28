@@ -1,0 +1,91 @@
+entity Town{
+   town String required maxlength(30)
+}
+
+entity Job{
+   job String required maxlength(60)
+}
+
+entity Person{
+   foreNames String required maxlength(60),
+   surname String required maxlength(60),
+   email String required maxlength(200)
+ }
+ 
+relationship ManyToOne {
+    Person{job} to Job
+}
+
+enum WarehouseStatus {
+    NEW, NORMAL, CANCELLED
+}
+
+entity Warehouse{
+   warehouse String required maxlength(30),
+   code String maxlength(10),
+   address String required maxlength(60),
+   street String maxlength(60),
+   status WarehouseStatus required
+}
+
+relationship ManyToOne {
+	Warehouse{town} to Town
+}
+
+relationship ManyToOne {
+	Warehouse{person} to Person
+}
+
+entity MeterMake{
+   meterMake String required maxlength(30)
+}
+
+entity MeterModel{
+   meterModel String required maxlength(30)
+}
+
+entity MeterType{
+   meterType String required maxlength(30)
+}
+
+relationship ManyToOne {
+    MeterModel{meterMake} to MeterMake
+}
+
+relationship ManyToOne {
+    MeterModel{meterType} to MeterType
+}
+
+entity MeterStatus{
+   meterStatus String required maxlength(30),
+   indInUse Boolean required
+}
+
+enum Owner {
+    COMPANY, INDIVIDUAL
+}
+
+entity Meter{
+   meter String required maxlength(20),
+   dateManufactured LocalDate required,
+   statusDate LocalDate required,
+   owner Owner
+}
+
+relationship ManyToOne {
+    Meter{meterType} to MeterType
+}
+
+relationship ManyToOne {
+    Meter{meterModel} to MeterModel
+}
+
+relationship ManyToOne {
+    Meter{warehouse} to Warehouse
+}
+
+relationship ManyToOne {
+    Meter{meterStatus} to MeterStatus
+}
+
+paginate Meter with pagination

@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-person-heading">Create or edit a Person</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!person.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="person.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_foreNames">Other Names</label>
+                    <input type="text" class="form-control" name="foreNames" id="field_foreNames"
+                        [(ngModel)]="person.foreNames" required maxlength="60"/>
+                    <div [hidden]="!(editForm.controls.foreNames?.dirty && editForm.controls.foreNames?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.foreNames?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.foreNames?.errors?.maxlength">
+                        This field cannot be longer than 60 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_surname">Surname</label>
+                    <input type="text" class="form-control" name="surname" id="field_surname"
+                        [(ngModel)]="person.surname" required maxlength="60"/>
+                    <div [hidden]="!(editForm.controls.surname?.dirty && editForm.controls.surname?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.surname?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.surname?.errors?.maxlength">
+                        This field cannot be longer than 60 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="person.email" required maxlength="200"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.maxlength">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_job">Job</label>
+                    <select class="form-control" id="field_job" name="job" [(ngModel)]="person.job" >
+                        <option [ngValue]="null">Choose a Job</option>
+                        <option [ngValue]="jobOption.id === person.job?.id ? person.job : jobOption" *ngFor="let jobOption of jobs; trackBy: trackJobById">{{jobOption.job}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

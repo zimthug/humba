@@ -1,0 +1,24 @@
+{
+    "name": "Town",
+    "fields": [
+        {
+            "fieldName": "town",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 30
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180827200518",
+    "entityTableName": "town",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

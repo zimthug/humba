@@ -1,0 +1,24 @@
+{
+    "name": "Job",
+    "fields": [
+        {
+            "fieldName": "job",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 60
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180827200519",
+    "entityTableName": "job",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

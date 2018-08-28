@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="person">
+            <h2><span>Person</span> {{person.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Other Names</span></dt>
+                <dd>
+                    <span>{{person.foreNames}}</span>
+                </dd>
+                <dt><span>Surname</span></dt>
+                <dd>
+                    <span>{{person.surname}}</span>
+                </dd>
+                <dt><span>Email</span></dt>
+                <dd>
+                    <span>{{person.email}}</span>
+                </dd>
+                <dt><span>Job</span></dt>
+                <dd>
+                    <div *ngIf="person.job">
+                        <a [routerLink]="['/job', person.job?.id, 'view']">{{person.job?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/person', person.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

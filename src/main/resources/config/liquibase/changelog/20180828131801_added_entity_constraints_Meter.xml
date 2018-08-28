@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Meter.
+    -->
+    <changeSet id="20180828131801-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="meter_type_id"
+                                 baseTableName="meter"
+                                 constraintName="fk_meter_meter_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meter_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="meter_model_id"
+                                 baseTableName="meter"
+                                 constraintName="fk_meter_meter_model_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meter_model"/>
+
+        <addForeignKeyConstraint baseColumnNames="warehouse_id"
+                                 baseTableName="meter"
+                                 constraintName="fk_meter_warehouse_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="warehouse"/>
+
+        <addForeignKeyConstraint baseColumnNames="meter_status_id"
+                                 baseTableName="meter"
+                                 constraintName="fk_meter_meter_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meter_status"/>
+
+    </changeSet>
+</databaseChangeLog>
