@@ -86,7 +86,7 @@ public class MeterStatusResource {
     @Timed
     public List<MeterStatus> getAllMeterStatuses() {
         log.debug("REST request to get all MeterStatuses");
-        return meterStatusRepository.findAll();
+        return meterStatusRepository.findAllByIndInUseIsTrueOrderByMeterStatusAsc();
     }
 
     /**

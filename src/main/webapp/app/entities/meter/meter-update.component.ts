@@ -74,6 +74,16 @@ export class MeterUpdateComponent implements OnInit {
         );
     }
 
+    /* The onSelect function will be triggered when the meter type has changed*/
+    onSelect() {
+        this.meterModelService.queryByType().subscribe(
+            (res: HttpResponse<IMeterModel[]>) => {
+                this.metermodels = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     previousState() {
         window.history.back();
     }

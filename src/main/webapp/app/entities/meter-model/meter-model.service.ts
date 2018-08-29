@@ -35,4 +35,9 @@ export class MeterModelService {
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+
+    queryByType(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IMeterModel[]>(this.resourceUrl, { params: options, observe: 'response' });
+    }
 }

@@ -86,8 +86,22 @@ public class MeterModelResource {
     @Timed
     public List<MeterModel> getAllMeterModels() {
         log.debug("REST request to get all MeterModels");
-        return meterModelRepository.findAll();
+        return meterModelRepository.findAllByOrOrderByMeterModel();
     }
+
+
+    /**
+     * GET  /meter-models-bytype/{meterTypeId} : get all the meterModels.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of meterModels in body
+     */
+    @GetMapping("/meter-models-bytype/{meterTypeId}")
+    @Timed
+    public List<MeterModel> getAllMeterModels(@PathVariable Long meterTypeId) {
+        log.debug("REST request to get all MeterModels with MeterTypeID");
+        return meterModelRepository.findAllByMeterTypeEquals(meterTypeId);
+    }
+
 
     /**
      * GET  /meter-models/:id : get the "id" meterModel.
