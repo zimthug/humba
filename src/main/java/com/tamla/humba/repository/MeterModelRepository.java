@@ -14,8 +14,8 @@ import java.util.List;
 @Repository
 public interface MeterModelRepository extends JpaRepository<MeterModel, Long> {
 
-    List<MeterModel> findAllByOrOrderByMeterModel();
+    List<MeterModel> findAllByOrderByMeterModel();
 
-    List<MeterModel> findAllByMeterTypeEquals(Long meterType);
+    List<MeterModel> findAllByMeterType(Long meterType);
 
 }

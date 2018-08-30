@@ -86,7 +86,7 @@ public class MeterModelResource {
     @Timed
     public List<MeterModel> getAllMeterModels() {
         log.debug("REST request to get all MeterModels");
-        return meterModelRepository.findAllByOrOrderByMeterModel();
+        return meterModelRepository.findAllByOrderByMeterModel();
     }
 
 
@@ -99,7 +99,7 @@ public class MeterModelResource {
     @Timed
     public List<MeterModel> getAllMeterModels(@PathVariable Long meterTypeId) {
         log.debug("REST request to get all MeterModels with MeterTypeID");
-        return meterModelRepository.findAllByMeterTypeEquals(meterTypeId);
+        return meterModelRepository.findAllByMeterType(meterTypeId);
     }
 
 
